@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | JobGuard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-page">
+
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main navigation">
+
+            <a href="index.html" class="brand">
+                <span class="brand-icon" aria-hidden="true">◆</span>
+                <span>Job<span class="brand-accent">Guard</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="check-job.html" class="nav-link">Check Job Ad</a>
+                <a href="index.html#safety-tips" class="nav-link">Safety Tips</a>
+                <a href="index.html#report-ad" class="nav-link">Report Ad</a>
+            </div>
+
+        </nav>
+    </header>
+
+    <main class="auth-main">
+
+        <section class="auth-card">
+
+            <div class="auth-brand-icon" aria-hidden="true">◆</div>
+
+            <h1>Welcome back</h1>
+
+            <p class="auth-description">
+                Log in to your JobGuard account to access
+                your assessment history and reports.
+            </p>
+
+            <form id="login-form">
+
+                <label for="login-email">Email Address</label>
+                <input
+                    type="email"
+                    id="login-email"
+                    name="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="login-password">Password</label>
+                <input
+                    type="password"
+                    id="login-password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+
+                <p class="auth-link-row">
+                    <a href="#" id="forgot-password-link">
+                        Forgot password?
+                    </a>
+                </p>
+
+                <button type="submit"
+                        class="button button-primary auth-button">
+                    Log In →
+                </button>
+
+                <p id="login-message"
+                   class="auth-message"
+                   role="status"></p>
+
+            </form>
+
+            <div class="auth-divider">
+                <span>or</span>
+            </div>
+
+            <a href="register.html"
+               class="button auth-secondary-button">
+                Create a New Account
+            </a>
+
+            <p class="auth-switch">
+                Don't have an account?
+                <a href="register.html">Register here</a>
+            </p>
+
+            <p class="auth-public-note">
+                You can also check job advertisements
+                without creating an account.
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+
+            <a href="index.html" class="brand footer-brand">
+                <span class="brand-icon" aria-hidden="true">◆</span>
+                <span>Job<span class="brand-accent">Guard</span></span>
+            </a>
+
+            <p>
+                JobGuard supports safer job searching through
+                preliminary risk assessments.
+            </p>
+
+            <span class="copyright">
+                © 2026 JobGuard. All rights reserved.
+            </span>
+
+        </div>
+    </footer>
+
+</body>
+</html>

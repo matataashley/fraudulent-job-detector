@@ -1,0 +1,136 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Register | JobGuard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="auth-page">
+
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main navigation">
+
+            <a href="index.html" class="brand">
+                <span class="brand-icon" aria-hidden="true">◆</span>
+                <span>Job<span class="brand-accent">Guard</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="check-job.html" class="nav-link">Check Job Ad</a>
+                <a href="index.html#safety-tips" class="nav-link">Safety Tips</a>
+                <a href="index.html#report-ad" class="nav-link">Report Ad</a>
+            </div>
+
+        </nav>
+    </header>
+
+    <main class="auth-main">
+
+        <section class="auth-card">
+
+            <div class="auth-brand-icon" aria-hidden="true">◆</div>
+
+            <h1>Create Your Account</h1>
+
+            <p class="auth-description">
+                Join JobGuard to access your assessment history
+                and manage your reports.
+            </p>
+
+            <form id="register-form">
+
+                <label for="register-name">Full Name</label>
+                <input
+                    type="text"
+                    id="register-name"
+                    name="full-name"
+                    placeholder="Enter your full name"
+                    autocomplete="name"
+                    required
+                >
+
+                <label for="register-email">Email Address</label>
+                <input
+                    type="email"
+                    id="register-email"
+                    name="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+                <label for="register-password">Password</label>
+                <input
+                    type="password"
+                    id="register-password"
+                    name="password"
+                    placeholder="Create a password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                >
+
+                <label for="confirm-password">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm-password"
+                    placeholder="Confirm your password"
+                    autocomplete="new-password"
+                    minlength="8"
+                    required
+                >
+
+                <button type="submit"
+                        class="button button-primary auth-button">
+                    Create Account →
+                </button>
+
+                <p id="register-message"
+                   class="auth-message"
+                   role="status"></p>
+
+            </form>
+
+            <p class="auth-switch">
+                Already have an account?
+                <a href="login.html">Log in</a>
+            </p>
+
+            <p class="auth-public-note">
+                Registration is optional. You can still check
+                job advertisements without an account.
+            </p>
+
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+
+            <a href="index.html" class="brand footer-brand">
+                <span class="brand-icon" aria-hidden="true">◆</span>
+                <span>Job<span class="brand-accent">Guard</span></span>
+            </a>
+
+            <p>
+                JobGuard supports safer job searching through
+                preliminary risk assessments.
+            </p>
+
+            <span class="copyright">
+                © 2026 JobGuard. All rights reserved.
+            </span>
+
+        </div>
+    </footer>
+
+</body>
+</html>

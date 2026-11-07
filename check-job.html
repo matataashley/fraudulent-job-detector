@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Check Job Advertisement | JobGuard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="check-job-page">
+
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main navigation">
+
+            <a href="index.html" class="brand">
+                <span class="brand-icon" aria-hidden="true">◆</span>
+                <span>Job<span class="brand-accent">Guard</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="check-job.html" class="nav-link active">Check Job Ad</a>
+                <a href="index.html#safety-tips" class="nav-link">Safety Tips</a>
+                <a href="index.html#report-ad" class="nav-link">Report Ad</a>
+            </div>
+
+        </nav>
+    </header>
+
+    <main class="section-padding">
+        <div class="container">
+
+            <div class="section-heading">
+                <span class="eyebrow">JOB ADVERTISEMENT CHECKER</span>
+                <h1>Check a Job Advertisement</h1>
+                <p>
+                    Enter the details of a job advertisement to check
+                    for warning signs that may indicate potential fraud.
+                </p>
+            </div>
+
+            <form id="job-check-form" class="job-check-form">
+
+                <label for="company-name">Company Name</label>
+                <input
+                    type="text"
+                    id="company-name"
+                    name="company-name"
+                    placeholder="Enter the company name"
+                    required
+                >
+
+                <label for="job-title">Job Title</label>
+                <input
+                    type="text"
+                    id="job-title"
+                    name="job-title"
+                    placeholder="Enter the advertised job title"
+                    required
+                >
+
+                <label for="job-description">Job Advertisement Details</label>
+                <textarea
+                    id="job-description"
+                    name="job-description"
+                    rows="7"
+                    placeholder="Paste the job description and any application instructions here"
+                    required
+                ></textarea>
+
+                <label for="job-url">Advertisement URL (Optional)</label>
+                <input
+                    type="url"
+                    id="job-url"
+                    name="job-url"
+                    placeholder="https://example.com/job"
+                >
+
+                <label for="contact-info">Advertiser Contact Information (Optional)</label>
+                <input
+                    type="text"
+                    id="contact-info"
+                    name="contact-info"
+                    placeholder="Enter the email address or phone number"
+                >
+
+                <button type="submit" class="button button-primary">
+                    Assess Advertisement →
+                </button>
+
+                <p id="form-message" role="status"></p>
+                
+                <button
+    type="button"
+    id="view-results-button"
+    class="button button-primary"
+    hidden
+>
+    View Analysis &amp; Risk Level →
+</button>
+
+            </form>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+            <a href="index.html" class="brand footer-brand">
+                <span class="brand-icon" aria-hidden="true">◆</span>
+                <span>Job<span class="brand-accent">Guard</span></span>
+            </a>
+
+            <p>
+                JobGuard provides risk assessments to support safer
+                job searching. Its findings do not guarantee that an
+                advertisement is genuine or fraudulent.
+            </p>
+
+            <span class="copyright">
+                © 2026 JobGuard. All rights reserved.
+            </span>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
