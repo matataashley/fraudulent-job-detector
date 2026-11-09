@@ -7,7 +7,7 @@
 
     <title>JobGuard | Job Advertisement Safety Checker</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body>
@@ -16,7 +16,7 @@
     <header class="site-header">
         <nav class="navbar container" aria-label="Main navigation">
 
-            <a href="index.html" class="brand">
+            <a href="{{ url_for('home') }}" class="brand">
                 <span class="brand-icon" aria-hidden="true">◆</span>
                 <span>Job<span class="brand-accent">Guard</span></span>
             </a>
@@ -32,12 +32,12 @@
             </button>
 
             <div class="nav-links" id="nav-links">
-                <a href="index.html" class="nav-link active">Home</a>
-                <a href="check-job.html" class="nav-link">Check Job Ad</a>
+                <a href="{{ url_for('home') }}" class="nav-link active">Home</a>
+                <a href="{{ url_for('check_job') }}">Check Job Ad</a>
                 <a href="#safety-tips" class="nav-link">Safety Tips</a>
-                <a href="#report-ad" class="nav-link">Report Ad</a>
-                <a href="login.html" class="nav-link login-link">Login</a>
-                <a href="register.html" class="nav-button">Register</a>
+                <a href="{{ url_for('report_ad') }}" class="nav-link">Report Ad</a>
+                <a href="{{ url_for('login') }}" class="nav-link login-link">Login</a>
+                <a href="{{ url_for('register') }}" class="nav-button">Register</a>
             </div>
 
         </nav>
@@ -67,7 +67,7 @@
                     </p>
 
                     <div class="hero-actions">
-                        <a href="check-job.html" class="button button-primary">
+                        <a href="{{ url_for('check_job') }}" class="button button-primary">
                             Check a Job Advertisement
                             <span aria-hidden="true">→</span>
                         </a>
@@ -193,7 +193,7 @@
                 </div>
 
                 <div class="center-action">
-                    <a href="check-job.html" class="button button-primary">
+                    <a href="{{ url_for('check_job') }}" class="button button-primary">
                         Check a Job Advertisement →
                     </a>
                 </div>
@@ -283,7 +283,7 @@
                         </p>
                     </div>
 
-                    <a href="report-ad.html" class="button button-primary">
+                    <a href="{{ url_for('report_ad') }}" class="button button-primary">
                         Report an Advertisement →
                     </a>
 
@@ -297,7 +297,7 @@
     <footer class="site-footer">
         <div class="container footer-content">
 
-            <a href="index.html" class="brand footer-brand">
+            <a href="{{ url_for('home') }}" class="brand footer-brand">
                 <span class="brand-icon" aria-hidden="true">◆</span>
                 <span>Job<span class="brand-accent">Guard</span></span>
             </a>
@@ -315,7 +315,7 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+   <script src="{{ url_for('static', filename='script.js') }}"></script>
 
 </body>
 </html>

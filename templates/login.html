@@ -7,7 +7,7 @@
 
     <title>Login | JobGuard</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 
 <body class="auth-page">
@@ -15,16 +15,16 @@
     <header class="site-header">
         <nav class="navbar container" aria-label="Main navigation">
 
-            <a href="index.html" class="brand">
+            <a href="{{ url_for('home') }}" class="brand">
                 <span class="brand-icon" aria-hidden="true">◆</span>
                 <span>Job<span class="brand-accent">Guard</span></span>
             </a>
 
             <div class="nav-links">
-                <a href="index.html" class="nav-link">Home</a>
-                <a href="check-job.html" class="nav-link">Check Job Ad</a>
-                <a href="index.html#safety-tips" class="nav-link">Safety Tips</a>
-                <a href="index.html#report-ad" class="nav-link">Report Ad</a>
+                <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('check_job') }}" class="nav-link">Check Job Ad</a>
+                <a href="{{ url_for('home') }}#safety-tips" class="nav-link">Safety Tips</a>
+                <a href="{{ url_for('report_ad') }}" class="nav-link">Report Ad</a>
             </div>
 
         </nav>
@@ -86,14 +86,14 @@
                 <span>or</span>
             </div>
 
-            <a href="register.html"
+            <a href="{{ url_for('register') }}"
                class="button auth-secondary-button">
                 Create a New Account
             </a>
 
             <p class="auth-switch">
                 Don't have an account?
-                <a href="register.html">Register here</a>
+                <a href="{{ url_for('register') }}">Register here</a>
             </p>
 
             <p class="auth-public-note">
@@ -108,7 +108,7 @@
     <footer class="site-footer">
         <div class="container footer-content">
 
-            <a href="index.html" class="brand footer-brand">
+            <a href="{{ url_for('home') }}" class="brand footer-brand">
                 <span class="brand-icon" aria-hidden="true">◆</span>
                 <span>Job<span class="brand-accent">Guard</span></span>
             </a>
@@ -124,6 +124,8 @@
 
         </div>
     </footer>
+
+
 
 </body>
 </html>

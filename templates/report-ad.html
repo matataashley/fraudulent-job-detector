@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report a Job Ad | JobGuard</title>
+ <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="logo">
+            <a href="{{ url_for('home') }}">JobGuard</a>
+        </div>
+
+        <nav>
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('check_job') }}">Check Job Ad</a>
+            <a href="{{ url_for('home') }}#safety-tips">Safety Tips</a>
+            <a href="{{ url_for('report_ad') }}">Report Ad</a>
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </nav>
+    </header>
+
+    <main class="report-container">
+
+        <h1>Report a Suspicious Job Advertisement</h1>
+
+        <p>
+            Help protect other job seekers by reporting
+            advertisements you believe may be fraudulent.
+        </p>
+
+        <form id="report-form">
+
+            <label for="reporter-name">Your Name</label>
+            <input type="text" id="reporter-name"
+                placeholder="Enter your name" required>
+
+            <label for="company-name">Company or Recruiter Name</label>
+            <input type="text" id="company-name"
+                placeholder="Enter company or recruiter name" required>
+
+            <label for="job-title">Job Title</label>
+            <input type="text" id="job-title"
+                placeholder="Enter the advertised job title" required>
+
+            <label for="job-url">Job Advertisement URL</label>
+            <input type="url" id="job-url"
+                placeholder="https://example.com/job">
+
+            <label for="reason">Reason for Reporting</label>
+            <select id="reason" required>
+                <option value="">Select a reason</option>
+                <option value="Upfront payment request">
+                    Upfront payment request
+                </option>
+                <option value="Unrealistic salary">
+                    Unrealistic salary promises
+                </option>
+                <option value="Suspicious contact details">
+                    Suspicious contact details
+                </option>
+                <option value="Request for sensitive information">
+                    Request for sensitive information
+                </option>
+                <option value="Other">Other</option>
+            </select>
+
+            <label for="report-details">Additional Details</label>
+            <textarea id="report-details"
+                placeholder="Explain why you believe this advert is suspicious..."
+                rows="5" required></textarea>
+
+            <button type="submit">Submit Report</button>
+
+            <p id="report-message" role="status"></p>
+
+        </form>
+    </main>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

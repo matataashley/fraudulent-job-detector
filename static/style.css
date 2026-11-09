@@ -1729,3 +1729,389 @@ body.assessments-page {
         font-size: 24px;
     }
 }
+
+        body {
+            background: #f4f9fc;
+            color: #153b61;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .history-container {
+            width: 92%;
+            max-width: 1250px;
+            margin: 35px auto;
+        }
+
+        .history-heading {
+            margin-bottom: 25px;
+        }
+
+        .history-heading h1 {
+            color: #123858;
+            margin-bottom: 8px;
+        }
+
+        .history-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(250px, 1fr);
+            gap: 22px;
+            align-items: start;
+        }
+
+        .history-panel {
+            background: white;
+            border: 1px solid #dce9f1;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-width: 0;
+        }
+
+        .history-summary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .summary-box {
+            padding: 18px;
+            border-radius: 9px;
+            background: #f3faff;
+            border: 1px solid #e0edf5;
+        }
+
+        .summary-box p {
+            margin: 0 0 8px;
+            font-size: 14px;
+        }
+
+        .summary-box h2 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .summary-box.low { background: #eaf9f1; }
+        .summary-box.medium { background: #fff5df; }
+        .summary-box.high { background: #fff0f1; }
+
+        .history-filters {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .history-filters input,
+        .history-filters select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cddce7;
+            border-radius: 7px;
+            box-sizing: border-box;
+            background: white;
+            color: #153b61;
+        }
+
+        .history-table-wrap {
+            overflow-x: auto;
+        }
+
+        .history-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .history-table th,
+        .history-table td {
+            text-align: left;
+            padding: 14px 10px;
+            border-bottom: 1px solid #e4edf3;
+        }
+
+        .history-table th {
+            background: #f2f8fc;
+            white-space: nowrap;
+        }
+
+        .history-table td {
+            vertical-align: middle;
+        }
+
+        .history-risk {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .history-risk.low {
+            background: #dff6e9;
+            color: #176c46;
+        }
+
+        .history-risk.medium {
+            background: #fff1d5;
+            color: #885600;
+        }
+
+        .history-risk.high {
+            background: #ffe1e3;
+            color: #a21e2a;
+        }
+
+        .view-result-btn {
+            padding: 8px 14px;
+            border: 1px solid #079fc1;
+            border-radius: 6px;
+            background: white;
+            color: #0785a4;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .view-result-btn:hover {
+            background: #e8faff;
+        }
+
+        .history-note {
+            font-size: 13px;
+            color: #647b8e;
+            line-height: 1.6;
+        }
+
+        .history-action {
+            display: block;
+            width: 100%;
+            padding: 13px;
+            background: #079fc1;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 7px;
+            box-sizing: border-box;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .history-action:hover {
+            background: #087eaa;
+        }
+
+        .history-empty {
+            padding: 25px;
+            text-align: center;
+            color: #647b8e;
+        }
+
+        .history-status {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #647b8e;
+        }
+
+        .history-pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 18px;
+        }
+
+        .history-pagination button {
+            padding: 8px 14px;
+            border: 1px solid #cddce7;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .history-pagination button:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+        }
+
+        @media (max-width: 900px) {
+            .history-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .history-filters {
+                grid-template-columns: 1fr;
+            }
+
+            .history-container {
+                width: 94%;
+            }
+
+            .history-panel {
+                padding: 14px;
+            }
+
+            .history-summary {
+                gap: 8px;
+            }
+
+            .summary-box {
+                padding: 13px;
+            }
+
+            .summary-box h2 {
+                font-size: 24px;
+            }
+        }
+
+/* =================================
+   MY ASSESSMENTS - HEADER STYLING
+================================= */
+
+.site-header {
+    background-color: #0b1b30;
+    min-height: 75px;
+    padding: 0 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid #18b6d2;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* JobGuard logo */
+.site-header .logo a {
+    color: #ffffff;
+    font-size: 25px;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+/* Navigation container */
+.site-header nav {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+/* Navigation links */
+.site-header nav a {
+    color: #dce8f5;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+/* Hover effect */
+.site-header nav a:hover {
+    color: #32c5df;
+}
+
+/* Mobile layout */
+@media (max-width: 768px) {
+    .site-header {
+        flex-direction: column;
+        gap: 18px;
+        padding: 18px 5%;
+    }
+
+    .site-header nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+}
+
+/* =================================
+   REPORT AN AD PAGE
+================================= */
+
+.report-container {
+    max-width: 750px;
+    margin: 50px auto;
+    padding: 35px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.report-container h1 {
+    color: #0b1b30;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.report-container > p {
+    color: #64748b;
+    text-align: center;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+/* Arrange every form element vertically */
+.report-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.report-container label {
+    display: block;
+    color: #0b1b30;
+    font-weight: 600;
+    margin-top: 12px;
+}
+
+.report-container input,
+.report-container select,
+.report-container textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 13px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    background-color: #ffffff;
+}
+
+.report-container textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.report-container input:focus,
+.report-container select:focus,
+.report-container textarea:focus {
+    outline: none;
+    border-color: #18b6d2;
+    box-shadow: 0 0 0 2px rgba(24, 182, 210, 0.12);
+}
+
+.report-container button {
+    margin-top: 20px;
+    padding: 14px;
+    background-color: #0b1b30;
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.report-container button:hover {
+    background-color: #123653;
+}
+
+@media (max-width: 768px) {
+    .report-container {
+        margin: 25px 15px;
+        padding: 22px;
+    }
+}

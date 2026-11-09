@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     jobCheckForm.addEventListener("submit", function (event) {
         event.preventDefault();
+        console.log("JOBGUARD FORM HANDLER IS RUNNING");
 
         const companyName =
             document.getElementById("company-name").value.trim();
@@ -170,28 +171,28 @@ document.addEventListener("DOMContentLoaded", function () {
             );
         }
 
-// 4. Urgency and pressure
-const urgencyPhrases = [
-    "apply immediately",
-    "limited slots",
-    "urgent hiring",
-    "act now", 
-    "immediate payment",
-    "pay today",
-    "last chance to apply",
-    "apply today",
-    "only 10 positions remain",
-    "limited positions",
-    "few positions remaining",
-    "hurry up",
-    "immediate action required",
-    "deadline approaching"
-];
+        // 4. Urgency and pressure
+        const urgencyPhrases = [
+            "apply immediately",
+            "limited slots",
+            "urgent hiring",
+            "act now",
+            "immediate payment",
+            "pay today",
+            "last chance to apply",
+            "apply today",
+            "only 10 positions remain",
+            "limited positions",
+            "few positions remaining",
+            "hurry up",
+            "immediate action required",
+            "deadline approaching"
+        ];
         const urgencyMatches = urgencyPhrases.filter(
             phrase => advertText.includes(phrase)
         );
         console.log("Advertisement text:", advertText);
-console.log("Urgency matches:", urgencyMatches);
+        console.log("Urgency matches:", urgencyMatches);
 
         if (urgencyMatches.length > 0) {
             addFinding(
@@ -325,9 +326,24 @@ console.log("Urgency matches:", urgencyMatches);
         };
 
         try {
+            // Save the latest assessment for the results page.
             sessionStorage.setItem(
                 "jobGuardAssessment",
                 JSON.stringify(assessment)
+            );
+
+            // Retrieve previous assessments.
+            let savedAssessments = JSON.parse(
+                sessionStorage.getItem("jobGuardAssessments") || "[]"
+            );
+
+
+            savedAssessments.unshift(assessment);
+
+
+            sessionStorage.setItem(
+                "jobGuardAssessments",
+                JSON.stringify(savedAssessments)
             );
         } catch (error) {
             formMessage.textContent =
@@ -342,7 +358,7 @@ console.log("Urgency matches:", urgencyMatches);
     });
 
     viewResultsButton.addEventListener("click", function () {
-        window.location.href = "results.html";
+        window.location.href = "/results";
     });
 });
 
@@ -358,68 +374,24 @@ document.addEventListener("DOMContentLoaded", function () {
     // Exit if this is not the My Assessments page.
     if (!tableBody) return;
 
-    // DEMONSTRATION RECORDS ONLY.
-    // These are not actual user assessments.
+    // Retrieve actual assessments saved by JobGuard.
+    const sampleAssessments = JSON.parse(
+        sessionStorage.getItem("jobGuardAssessments") || "[]"
+    ).map(function (assessment, index) {
 
-    const sampleAssessments = [
-        {
-            id: "A001",
-            date: "2026-10-24",
-            title: "Tech Support Intern",
-            company: "Global Tech Ltd",
-            risk: "low"
-        },
-        {
-            id: "A002",
-            date: "2026-10-22",
-            title: "Data Entry Clerk",
-            company: "StarJobs Agency",
-            risk: "medium"
-        },
-        {
-            id: "A003",
-            date: "2026-10-21",
-            title: "Customer Support",
-            company: "Bright Solutions",
-            risk: "low"
-        },
-        {
-            id: "A004",
-            date: "2026-10-20",
-            title: "Marketing Assistant",
-            company: "Future Works",
-            risk: "high"
-        },
-        {
-            id: "A005",
-            date: "2026-10-18",
-            title: "Web Developer",
-            company: "Digital Creators",
-            risk: "medium"
-        },
-        {
-            id: "A006",
-            date: "2026-10-15",
-            title: "Graphic Designer",
-            company: "Creative Media Co",
-            risk: "low"
-        },
-        {
-            id: "A007",
-            date: "2026-10-12",
-            title: "Sales Associate",
-            company: "MarketPlus",
-            risk: "medium"
-        },
-        {
-            id: "A008",
-            date: "2026-10-10",
-            title: "Accountant",
-            company: "Finance Group Ltd",
-            risk: "low"
-        }
-    ];
+        return {
+            id: "A" + String(index + 1).padStart(3, "0"),
 
+            date: new Date(assessment.assessedAt)
+                .toLocaleDateString("en-CA"),
+
+            title: assessment.jobTitle,
+
+            company: assessment.companyName,
+
+            risk: assessment.riskLevel.toLowerCase()
+        };
+    });
     const searchInput =
         document.getElementById("history-search");
 
@@ -487,13 +459,13 @@ document.addEventListener("DOMContentLoaded", function () {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        return sampleAssessments.filter(function(record) {
+        return sampleAssessments.filter(function (record) {
 
             const matchesSearch = [
                 record.title,
                 record.company,
                 record.date
-            ].some(function(value) {
+            ].some(function (value) {
                 return value.toLowerCase().includes(searchTerm);
             });
 
@@ -563,7 +535,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         } else {
 
-            visibleRecords.forEach(function(record) {
+            visibleRecords.forEach(function (record) {
 
                 const row = document.createElement("tr");
 
@@ -595,7 +567,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 viewButton.className = "view-result-btn";
                 viewButton.textContent = "View";
 
-                viewButton.addEventListener("click", function() {
+                viewButton.addEventListener("click", function () {
 
                     statusMessage.textContent =
                         "Demo record " + record.id +
@@ -649,7 +621,7 @@ document.addEventListener("DOMContentLoaded", function () {
         resetPageAndRender
     );
 
-    previousButton.addEventListener("click", function() {
+    previousButton.addEventListener("click", function () {
 
         if (currentPage > 1) {
             currentPage--;
@@ -657,7 +629,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    nextButton.addEventListener("click", function() {
+    nextButton.addEventListener("click", function () {
 
         const totalPages = Math.max(
             1,
@@ -676,3 +648,6 @@ document.addEventListener("DOMContentLoaded", function () {
     renderAssessments();
 
 });
+
+
+
