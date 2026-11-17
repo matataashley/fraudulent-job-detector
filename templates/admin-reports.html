@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reported Ads | JobGuard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="admin-page">
+
+    <div class="admin-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="admin-sidebar">
+
+            <div class="admin-brand">
+                Job<span>Guard</span>
+            </div>
+
+            <nav class="admin-nav">
+                <a href="{{ url_for('admin_dashboard') }}">
+                    ▦ &nbsp; Overview
+                </a>
+
+                <a href="{{ url_for('admin_reports') }}" class="active">
+                    ⚑ &nbsp; Reported Ads
+                </a>
+
+                <a href="{{ url_for('home') }}">
+                    ⌂ &nbsp; Home Page
+                </a>
+
+                <a href="{{ url_for('dashboard') }}">
+                    ▤ &nbsp; User Dashboard
+                </a>
+
+                <a href="{{ url_for('logout') }}" class="admin-logout">
+                    ↪ &nbsp; Logout
+                </a>
+            </nav>
+
+        </aside>
+
+
+        <!-- MAIN CONTENT -->
+        <main class="admin-main">
+
+            <!-- PAGE HEADER -->
+            <header class="admin-topbar">
+
+                <div>
+                    <h1>Reported Advertisements</h1>
+                    <p>Review and manage suspicious job advertisements.</p>
+                </div>
+
+                <div class="admin-profile">
+                    Administrator
+                </div>
+
+            </header>
+
+
+            <!-- REPORT STATISTICS -->
+            <section class="admin-stats">
+
+                <div class="admin-stat-card">
+                    <div class="stat-icon">⚑</div>
+                    <span class="stat-label">Total Reports</span>
+                    <h2>{{ reports|length }}</h2>
+                </div>
+
+                <div class="admin-stat-card pending">
+                    <div class="stat-icon">◷</div>
+                    <span class="stat-label">Pending</span>
+                    <h2>
+                        {{ reports|selectattr('status', 'equalto', 'Pending')|list|length }}
+                    </h2>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="stat-icon">⌕</div>
+                    <span class="stat-label">Under Review</span>
+                    <h2>
+                        {{ reports|selectattr('status', 'equalto', 'Under Review')|list|length }}
+                    </h2>
+                </div>
+
+                <div class="admin-stat-card">
+                    <div class="stat-icon">✓</div>
+                    <span class="stat-label">Resolved</span>
+                    <h2>
+                        {{ reports|selectattr('status', 'equalto', 'Resolved')|list|length }}
+                    </h2>
+                </div>
+
+            </section>
+
+
+            <!-- REPORT MANAGEMENT PANEL -->
+            <section class="admin-panel reports-panel">
+
+                <div class="reports-heading">
+                    <div>
+                        <h2>Report Management</h2>
+                        <p>Review submitted reports and update their status.</p>
+                    </div>
+
+                    <input type="search" id="report-search" placeholder="Search company or job title..."
+                        aria-label="Search reports">
+                </div>
+
+
+                {% if reports %}
+
+                <div class="table-wrap">
+
+                    <table class="dashboard-table reports-table">
+
+                        <thead>
+                            <tr>
+                                <th>Report</th>
+                                <th>Company / Job</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Date Submitted</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="reports-table-body">
+
+                            {% for report in reports %}
+
+                            <tr class="report-row">
+
+                                <td>
+                                    <strong>#{{ report.report_id }}</strong>
+                                </td>
+
+                                <td>
+                                    <strong>{{ report.company_name }}</strong>
+                                    <small>{{ report.job_title }}</small>
+                                </td>
+
+                                <td class="report-reason">
+                                    {{ report.report_reason }}
+
+                                    {% if report.additional_details %}
+                                    <details>
+                                        <summary>More details</summary>
+                                        <p>{{ report.additional_details }}</p>
+                                    </details>
+                                    {% endif %}
+
+                                    {% if report.job_url %}
+                                    <a href="{{ report.job_url }}" target="_blank" rel="noopener noreferrer">
+                                        View job link
+                                    </a>
+                                    {% endif %}
+                                </td>
+
+                                <td>
+                                    <span class="report-status
+                                    {% if report.status == 'Pending' %}status-pending
+                                    {% elif report.status == 'Under Review' %}status-review
+                                    {% else %}status-resolved{% endif %}">
+                                        {{ report.status }}
+                                    </span>
+                                </td>
+
+                                <td>{{ report.reported_at }}</td>
+
+                                <td>
+                                    <form method="POST"
+                                        action="{{ url_for('update_report_status', report_id=report.report_id) }}"
+                                        class="report-update-form">
+
+                                        <select name="status" aria-label="Update report status">
+
+                                            <option value="Pending" {% if report.status=='Pending' %}selected{% endif
+                                                %}>
+                                                Pending
+                                            </option>
+
+                                            <option value="Under Review" {% if report.status=='Under Review'
+                                                %}selected{% endif %}>
+                                                Under Review
+                                            </option>
+
+                                            <option value="Resolved" {% if report.status=='Resolved' %}selected{% endif
+                                                %}>
+                                                Resolved
+                                            </option>
+
+                                        </select>
+
+                                        <button type="submit" class="admin-button">
+                                            Update
+                                        </button>
+
+                                    </form>
+                                </td>
+
+                            </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <p id="no-search-results" hidden>
+                    No reports match your search.
+                </p>
+
+                {% else %}
+
+                <div class="reports-empty">
+                    <div class="empty-icon">✓</div>
+                    <h3>No Reports Yet</h3>
+                    <p>
+                        No suspicious advertisements have been reported.
+                        New submissions will appear here.
+                    </p>
+                </div>
+
+                {% endif %}
+
+            </section>
+
+
+            <footer class="admin-footer">
+                JobGuard &copy; 2026. Cybersecurity-Based
+                Job Advertisement Detection System.
+            </footer>
+
+        </main>
+
+    </div>
+
+
+    <!-- REPORT SEARCH -->
+    <script>
+        const searchInput = document.getElementById("report-search");
+
+        if (searchInput) {
+            searchInput.addEventListener("input", function () {
+
+                const searchValue = this.value.toLowerCase();
+                const rows = document.querySelectorAll(".report-row");
+
+                let visibleCount = 0;
+
+                rows.forEach(function (row) {
+
+                    const rowText = row.textContent.toLowerCase();
+                    const matches = rowText.includes(searchValue);
+
+                    row.hidden = !matches;
+
+                    if (matches) {
+                        visibleCount++;
+                    }
+                });
+
+                const noResults = document.getElementById("no-search-results");
+
+                if (noResults) {
+                    noResults.hidden = visibleCount !== 0;
+                }
+            });
+        }
+    </script>
+
+</body>
+
+</html>

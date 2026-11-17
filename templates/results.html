@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Assessment Results | JobGuard</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="results-page">
+
+    <header class="site-header">
+        <nav class="navbar container" aria-label="Main navigation">
+
+            <a href="{{ url_for('home') }}" class="brand">
+                <span class="brand-icon" aria-hidden="true">◆</span>
+                <span>Job<span class="brand-accent">Guard</span></span>
+            </a>
+
+            <div class="nav-links">
+                <a href="{{ url_for('home') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('check_job') }}" class="nav-link active">Check Job Ad</a>
+                <a href="{{ url_for('home') }}#safety-tips" class="nav-link">Safety Tips</a>
+                <a href="{{ url_for('report_ad') }}" class="nav-link">Report Ad</a>
+            </div>
+
+        </nav>
+    </header>
+
+    <main class="section-padding">
+        <div class="container">
+
+            <div class="section-heading results-heading">
+                <span class="eyebrow">JOBGUARD REPORT</span>
+                <h1>Job Advertisement Analysis</h1>
+                <p>
+                    Review the assessment findings and warning signs
+                    identified in the submitted advertisement.
+                </p>
+            </div>
+
+            <section id="assessment-results" class="results-card">
+
+                <div class="result-banner">
+                    <div class="result-status-icon" aria-hidden="true">
+                        !
+                    </div>
+
+                    <div class="result-status">
+                        <span class="result-label">Risk Level</span>
+                        <h2 id="result-level">Not available</h2>
+                        <p id="result-summary">
+                            Your assessment summary will appear here.
+                        </p>
+                    </div>
+
+                    <div class="score-panel">
+                        <span class="result-label">Risk Score</span>
+                        <div class="score-value">
+                            <span id="result-score">Not available</span>
+                        </div>
+                        <p>Higher scores indicate more warning signs.</p>
+                    </div>
+                </div>
+
+                <div class="job-details">
+                    <div>
+                        <span class="result-label">Company</span>
+                        <p id="result-company">Not available</p>
+                    </div>
+
+                    <div>
+                        <span class="result-label">Job Title</span>
+                        <p id="result-title">Not available</p>
+                    </div>
+                </div>
+
+                <div class="result-section">
+                    <h3>
+                        <span class="section-symbol" aria-hidden="true">!</span>
+                        Warning Signs Detected
+                    </h3>
+
+                    <ul id="result-warnings" class="warning-list">
+                        <li>Assessment results will appear here.</li>
+                    </ul>
+                </div>
+
+                <div class="recommendation-panel">
+                    <div class="recommendation-icon" aria-hidden="true">
+                        ✓
+                    </div>
+
+                    <div>
+                        <h3>Recommended Precautions</h3>
+
+                        <ul id="result-recommendations">
+                            <li>
+                                Verify the employer using independent,
+                                reliable sources.
+                            </li>
+                            <li>
+                                Avoid paying recruitment fees without
+                                independent verification.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p class="results-disclaimer">
+                    <strong>Important:</strong>
+                    This assessment identifies potential warning signs.
+                    It does not prove that an advertisement is genuine
+                    or fraudulent.
+                </p>
+
+                <a href="{{ url_for('check_job') }}" class="button button-primary results-action">
+                    Check Another Advertisement →
+                </a>
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-content">
+
+            <a href="{{ url_for('home') }}" class="brand footer-brand">
+                <span class="brand-icon" aria-hidden="true">◆</span>
+                <span>Job<span class="brand-accent">Guard</span></span>
+            </a>
+
+            <p>
+                JobGuard supports safer job searching through
+                preliminary risk assessments.
+            </p>
+
+            <span class="copyright">
+                © 2026 JobGuard. All rights reserved.
+            </span>
+
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const assessment = {% if assessment %}
+    {{ {
+            "company_name": assessment.company_name,
+            "job_title": assessment.job_title,
+            "risk_score": assessment.risk_score,
+            "risk_level": assessment.risk_level,
+            "findings": assessment.findings
+        } | tojson }}
+            {% else %}
+            null
+    {% endif %};
+
+        const resultsContainer =
+            document.getElementById("assessment-results");
+
+        if (!assessment) {
+            resultsContainer.textContent =
+                "No assessment results were found. Please check a job advertisement first.";
+            return;
+        }
+
+        // Display company and job information.
+        document.getElementById("result-company").textContent =
+            assessment.company_name || "Not provided";
+
+        document.getElementById("result-title").textContent =
+            assessment.job_title || "Not provided";
+
+        document.getElementById("result-score").textContent =
+            assessment.risk_score + "/100";
+
+        // Display the risk level.
+        const levelElement =
+            document.getElementById("result-level");
+
+        levelElement.textContent = assessment.risk_level;
+
+        const normalizedLevel =
+            String(assessment.risk_level || "").toLowerCase();
+
+        const summaryElement =
+            document.getElementById("result-summary");
+
+        const banner =
+            document.querySelector(".result-banner");
+
+        if (normalizedLevel === "high") {
+            summaryElement.textContent =
+                "Several warning signs were detected. Proceed with caution.";
+            banner.classList.add("risk-high");
+
+        } else if (normalizedLevel === "medium") {
+            summaryElement.textContent =
+                "Some warning signs were detected. Verify the details carefully.";
+            banner.classList.add("risk-medium");
+
+        } else {
+            summaryElement.textContent =
+                "Few or no warning signs were detected by the current rules.";
+            banner.classList.add("risk-low");
+        }
+
+        // Display findings retrieved from MySQL.
+        const warningList =
+            document.getElementById("result-warnings");
+
+        warningList.replaceChildren();
+
+        const recommendationList =
+            document.getElementById("result-recommendations");
+
+        recommendationList.replaceChildren();
+
+        if (!assessment.findings || assessment.findings.length === 0) {
+
+            const item = document.createElement("li");
+
+            item.textContent =
+                "No warning signs were detected by the current rules.";
+
+            warningList.appendChild(item);
+
+        } else {
+
+            assessment.findings.forEach(function (finding) {
+
+                const item = document.createElement("li");
+
+                item.textContent =
+                    finding.category + " (" +
+                    finding.severity + ", " +
+                    finding.weight + " points): " +
+                    finding.explanation;
+
+                warningList.appendChild(item);
+
+                const recommendation = document.createElement("li");
+
+                const advice = {
+                    "Upfront payment requests":
+                        "Verify the recruiter independently and avoid paying fees to secure employment.",
+
+                    "Sensitive information requests":
+                        "Do not share passwords, PINs or unnecessary sensitive financial information.",
+
+                    "Unrealistic salary promises":
+                        "Compare the advertised salary with similar jobs and verify the employer.",
+
+                    "Urgency and pressure":
+                        "Take time to verify the opportunity. Avoid rushed payments or decisions.",
+
+                    "Suspicious contact details or URL patterns":
+                        "Find the employer's official website independently before following unfamiliar links.",
+
+                    "Incomplete advertisement details":
+                        "Request clear job duties, qualifications and verifiable employer information."
+                };
+
+                recommendation.textContent =
+                    advice[finding.category] ||
+                    "Verify the information independently before proceeding.";
+
+                recommendationList.appendChild(recommendation);
+            });
+        }
+});
+
+    </script>
+
+</body>
+
+</html>
